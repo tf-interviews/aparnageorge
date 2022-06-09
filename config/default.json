@@ -1,0 +1,4 @@
+{
+    "mongoURI":
+      "mongodb+srv://defuser:trialpass@cluster0.npgy2.mongodb.net/?retryWrites=true&w=majority"
+  }
