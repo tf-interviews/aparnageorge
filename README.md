@@ -6,6 +6,7 @@
    `git clone <repo-URL>`
 2. Navigate to the root folder of the project `cd aparnageorge` on command line/terminal and run `npm install` to install all the dependencies.
 3. Once the installation of dependencies are complete, run `npm run app` on command line/terminal to run the project.
+4. Alternatively, to execute the test cases, run `npm test`. 
 
 ## Features and how to use these APIs:
 To invoke the API via terminal please run using `curl` or use tools like Postman.
