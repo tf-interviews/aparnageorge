@@ -76,6 +76,9 @@ router.route('/:id')
 /* @route GET api/notes/tags/:author/:tag
 @description view active notes by tag
 @access Public */
+/* @route DELETE api/notes/tags/:author/:tag
+@description delete active notes by tag
+@access Public */
 router.route('/tags/:author/:tag')
   .get(note.notebytag)
   .delete(note.deletenotebytag)
