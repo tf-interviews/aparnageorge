@@ -8,11 +8,6 @@ const User = require('../../models/User');
 // Load Admin Controller
 var admin = require('../../controllers/api/adminController');
 
-/* @route GET api/admin/test
-@description tests notes route
-@access Public */
-router.get('/test', (req, res) => res.send('admin route testing!'));
-
 /* @route GET api/admin
 @description Get all notes
 @access Public */

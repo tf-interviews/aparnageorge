@@ -9,17 +9,25 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 
 let should = chai.should();
+let testuser = "apgeorge"
 
 
 chai.use(chaiHttp);
 describe('Notes', () => {
-   
+    let testnote; 
+    before((done) => {
+      testnote = Note.create({
+         title: "Test note here", 
+         description: "This is a test note specific to this module",  
+         author: "apgeorge",
+        tags:["tagtest"]})
+         .then(() => done()) 
+    });
 
 //Test the /GET route
 describe('/GET note', () => {
     // Test the /GET route - get all active notes for a user
     it('it should GET all the active notes for a user', (done) => {
-        testuser = "apgeorge"
         chai.request(app)
             .get('/api/notes/'+testuser)
             .end((err, res) => {
@@ -32,7 +40,6 @@ describe('/GET note', () => {
 
     // Test the /GET route- get all archived notes for a user
     it('it should GET all the archived notes for a user', (done) => {
-        testuser = "apgeorge"
         chai.request(app)
             .get('/api/notes/archived/'+testuser)
             .end((err, res) => {
@@ -45,7 +52,7 @@ describe('/GET note', () => {
 
     //Test the /GET route- get a single note by id
     it('it should GET a single note by id', (done) => {
-        var testid = "62a17ba27caba1266c3b8a8e"
+        var testid = "62a17ba27caba1266c3b8a8e";
         chai.request(app)
             .get('/api/notes/id/'+testid)
             .end((err, res) => {
@@ -59,7 +66,6 @@ describe('/GET note', () => {
     //Test the /GET route - it should get notes by its tag
     it('it should get notes by its tag', (done) => {
         var testtag = "trial";
-        testuser = "apgeorge"
         chai.request(app)
             .get('/api/notes/tags/:author/:tag')
             .end((err, res) => {
@@ -126,10 +132,9 @@ describe('/PUT note', () => {
   it('it should update a selected note ', (done) => {
 
     let note = {
-        description: "Voila!",
-        tags: ["success"]
+        description: "Voila!"
     }
-    let testid = "62a17ba27caba1266c3b8a8e"
+    let testid = "62a1a69e5daafd9c1f01c5e3";
     chai.request(app)
         .put('/api/notes/update/'+testid)
         .send(note)
@@ -145,7 +150,7 @@ describe('/PUT note', () => {
   //Test the /PUT route - it should Archive a selected note
   it('it should archive a selected note ', (done) => {
 
-    let testid = "62a17ba27caba1266c3b8a8e"
+    let testid = "62a182bf3f9b09a423eee9c4"
     chai.request(app)
         .put('/api/notes/archive/'+testid)
         .end((err, res) => {
@@ -158,7 +163,7 @@ describe('/PUT note', () => {
     //Test the /PUT route - it should Unrchive a selected note
     it('it should unarchive a selected note ', (done) => {
 
-        let testid = "62a17ba27caba1266c3b8a8e"
+        let testid = "62a182bf3f9b09a423eee9c4"
         chai.request(app)
             .put('/api/notes/unarchive/'+testid)
             .end((err, res) => {
@@ -172,7 +177,7 @@ describe('/PUT note', () => {
   //Test the /PUT route - it should archive multiple notes
   it('it should archive multiple notes', (done) => {
 
-    let testids = ["62a17ba27caba1266c3b8a8e","629f6bac8b23b0a21b876899"]
+    let testids = ["62a182bf3f9b09a423eee9c4"]
     chai.request(app)
         .put('/api/notes/multiarchive/')
         .end((err, res) => {
@@ -188,7 +193,7 @@ describe('/PUT note', () => {
   //Test the /PUT route - it should unarchive multiple notes
   it('it should unarchive multiple notes', (done) => {
 
-    let testids = ["62a17ba27caba1266c3b8a8e","629f6bac8b23b0a21b876899"]
+    let testids = ["62a182bf3f9b09a423eee9c4"]
     chai.request(app)
         .put('/api/notes/multiunarchive/')
         .end((err, res) => {
@@ -205,7 +210,7 @@ describe('/DELETE note', () => {
   
   //Test the /DELETE route - it should delete a note by its id
   it('it should delete a note by its id', (done) => {
-    var testid  = "629fad47e9c7fd33dfff69cd";
+    var testid  = "62a1a69e5daafd9c1f01c5e3";
     chai.request(app)
       .delete('/api/notes/'+testid)
       .end((err, res) => {
@@ -218,8 +223,7 @@ describe('/DELETE note', () => {
   
   //Test the /DELETE route - it should delete notes by their tag
   it('it should delete notes by their tag ', (done) => {
-    var testtag = "trial1";
-    testuser = "apgeorge"
+    var testtag = "tagtest";
     chai.request(app)
       .delete('/api/notes/tags/:author/:tag')
       .end((err, res) => {

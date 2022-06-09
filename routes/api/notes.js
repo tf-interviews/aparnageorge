@@ -6,11 +6,6 @@ const Note = require('../../models/Note');
 // Load Notes Controller
 var note = require('../../controllers/api/notesController');
 
-/* @route GET api/notes/test
-@description tests notes route
-@access Public */
-router.get('/test', (req, res) => res.send('note route testing!'));
-
 /* @route GET api/notes/:author
 @description Get all notes by userid that aren't archived
 @access Public */
