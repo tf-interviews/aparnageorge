@@ -24,7 +24,7 @@ router.route('/:author')
 router.route('/archived/:author')
   .get(note.archivednotes)
 
-/* @route GET api/notes/view/:id
+/* @route GET api/notes/id/:id
 @description Get a single note by id
 @access Public */
 router.route('/id/:id')
@@ -36,7 +36,7 @@ router.route('/id/:id')
 router.route('/')
   .post(note.savenote)
 
-/* @route PUT api/notes/:id
+/* @route PUT api/notes/update/:id
 @description Update existing note
 @access Public */
 router.route('/update/:id')
@@ -73,7 +73,7 @@ router.route('/multiunarchive')
 router.route('/:id')
   .delete(note.deletenote)
 
-/* @route GET api/notes/tags/:tag
+/* @route GET api/notes/tags/:author/:tag
 @description view active notes by tag
 @access Public */
 router.route('/tags/:author/:tag')
