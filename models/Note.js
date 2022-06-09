@@ -20,7 +20,8 @@ const NoteSchema = new mongoose.Schema({
   },
   /* first published/created date for the note */
   published_date: {
-    type: Date
+    type: Date,
+    default: Date.now
   },
   /* last updated date for the note */
   updated_date: {
