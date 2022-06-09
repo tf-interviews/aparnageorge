@@ -77,7 +77,7 @@ describe('/POST route', () => {
   it('it should save a user with all required attributes ', (done) => {
     let user = {
         name: "Trial User2",
-        userid: "trialuser2"
+        author: "trialuser2"
     }
   chai.request(app)
       .post('/api/admin/users')
