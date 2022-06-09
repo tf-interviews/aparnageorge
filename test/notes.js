@@ -45,7 +45,7 @@ describe('/GET note', () => {
 
     //Test the /GET route- get a single note by id
     it('it should GET a single note by id', (done) => {
-        var testid = "629f6bac8b23b0a21b876899"
+        var testid = "62a17ba27caba1266c3b8a8e"
         chai.request(app)
             .get('/api/notes/id/'+testid)
             .end((err, res) => {
@@ -99,10 +99,10 @@ describe('/POST note', () => {
   //Test the /POST route - it should save a note with all required attributes
   it('it should save a note with all required attributes ', (done) => {
     let note = {
-        title: "Test Note",
-        author: "apgeorge",
-        tags: ["test","trial"],
-        description: "Test Note for Trial"
+        title: "Just another note",
+        author: "scooper",
+        tags: ["demo","trial"],
+        description: "Just another Note for Testing"
     }
   chai.request(app)
       .post('/api/notes/')
@@ -126,11 +126,10 @@ describe('/PUT note', () => {
   it('it should update a selected note ', (done) => {
 
     let note = {
-      
-        author: "apgeorge",
-        tags: ["test","trial1"]
+        description: "Voila!",
+        tags: ["success"]
     }
-    let testid = "629f6b7b8b23b0a21b876896"
+    let testid = "62a17ba27caba1266c3b8a8e"
     chai.request(app)
         .put('/api/notes/update/'+testid)
         .send(note)
@@ -146,7 +145,7 @@ describe('/PUT note', () => {
   //Test the /PUT route - it should Archive a selected note
   it('it should archive a selected note ', (done) => {
 
-    let testid = "629f6b7b8b23b0a21b876896"
+    let testid = "62a17ba27caba1266c3b8a8e"
     chai.request(app)
         .put('/api/notes/archive/'+testid)
         .end((err, res) => {
@@ -156,11 +155,24 @@ describe('/PUT note', () => {
         done();
     });
 });
+    //Test the /PUT route - it should Unrchive a selected note
+    it('it should unarchive a selected note ', (done) => {
+
+        let testid = "62a17ba27caba1266c3b8a8e"
+        chai.request(app)
+            .put('/api/notes/unarchive/'+testid)
+            .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.have.property('msg').eql('Note Unarchived successfully');
+                    
+                done();
+        });
+    });
 
   //Test the /PUT route - it should archive multiple notes
   it('it should archive multiple notes', (done) => {
 
-    let testids = ["629f6b7b8b23b0a21b876896","629f6bac8b23b0a21b876899"]
+    let testids = ["62a17ba27caba1266c3b8a8e","629f6bac8b23b0a21b876899"]
     chai.request(app)
         .put('/api/notes/multiarchive/')
         .end((err, res) => {
@@ -171,24 +183,12 @@ describe('/PUT note', () => {
       });
   });
   
-  //Test the /PUT route - it should Unrchive a selected note
-  it('it should unarchive a selected note ', (done) => {
-
-    let testid = "629f6b7b8b23b0a21b876896"
-    chai.request(app)
-        .put('/api/notes/unarchive/'+testid)
-        .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.have.property('msg').eql('Note Unarchived successfully');
-                
-            done();
-      });
-  });
+  
 
   //Test the /PUT route - it should unarchive multiple notes
   it('it should unarchive multiple notes', (done) => {
 
-    let testids = ["629f6b7b8b23b0a21b876896","629f6bac8b23b0a21b876899"]
+    let testids = ["62a17ba27caba1266c3b8a8e","629f6bac8b23b0a21b876899"]
     chai.request(app)
         .put('/api/notes/multiunarchive/')
         .end((err, res) => {

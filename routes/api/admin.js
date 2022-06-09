@@ -43,10 +43,10 @@ router.route('/users')
   .post(admin.adduser)
 
 
-/* @route DELETE api/admin/users/:id
-@description Delete user by id
+/* @route DELETE api/admin/users/:userid
+@description Delete user by userid
 @access Public */
-router.route('/users/:id')
+router.route('/users/:userid')
   .delete(admin.deleteuser)
   
 module.exports = router;

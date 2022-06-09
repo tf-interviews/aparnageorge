@@ -76,8 +76,9 @@ describe('/POST route', () => {
   //Test the /POST route - it should save a user with all required attributes
   it('it should save a user with all required attributes ', (done) => {
     let user = {
-        name: "Trial User2",
-        author: "trialuser2"
+        name: "Joe George",
+        author: "jgeorge",
+        bio: "Test User"
     }
   chai.request(app)
       .post('/api/admin/users')
@@ -96,9 +97,9 @@ describe('/POST route', () => {
 //Test the /DELETE route
 describe('/DELETE route', () => {
   
-  //Test the /DELETE route - it should delete a user by id
-  it('it should delete a user by id', (done) => {
-    var testid  = "62a13930b2f83412e6a692d1";
+  //Test the /DELETE route - it should delete a user by userid
+  it('it should delete a user by userid', (done) => {
+    var testid  = "jgeorge";
     chai.request(app)
       .delete('/api/admin/users/'+testid)
       .end((err, res) => {

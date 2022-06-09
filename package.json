@@ -6,7 +6,7 @@
     "scripts": {
       "start": "node app.js",
       "app": "nodemon app.js",
-      "test": "mocha --timeout 10000"
+      "test": "mocha --file ./test/teardown.js --exit"
     },
     "author": "Aparna George",
     "license": "ISC",

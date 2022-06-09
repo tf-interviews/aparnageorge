@@ -50,11 +50,11 @@ exports.adduser = function(req, res) {
   .catch(err => res.status(400).json({ error: 'Unable to add this user ' + err }));
   };
 
-/* from DELETE api/admin/users/:id
-@description Delete user by id
+/* from DELETE api/admin/users/:userid
+@description Delete user by userid
 */ 
 exports.deleteuser = function(req, res) {
-    User.findByIdAndRemove(req.params.id, req.body)
+    User.findOneAndDelete(req.params.userid, req.body)
       .then(user => res.json({ msg: 'User deleted successfully' }))
       .catch(err => res.status(404).json({ error: 'No such user found ' +err}));
     };
