@@ -12,13 +12,13 @@ let should = chai.should();
 
 
 chai.use(chaiHttp);
-describe('Notes', () => {
+describe('Admin', () => {
    
 
 //Test the /GET route
-describe('/GET note', () => {
-    // Test the /GET route - Get all the active notes for a user
-    it('it should Get all the active notes for a user', (done) => {
+describe('/GET route', () => {
+    // Test the /GET route - Get all notes
+    it('it should Get all notes', (done) => {
         chai.request(app)
             .get('/api/admin/')
             .end((err, res) => {
@@ -28,8 +28,33 @@ describe('/GET note', () => {
               done();
             });
       });
+
+    // Test the /GET route - Get all archived notes
+    it('it should Get all archived notes', (done) => {
+        chai.request(app)
+            .get('/api/admin/archived')
+            .end((err, res) => {
+                  res.should.have.status(200);
+                  res.body.should.be.a('array');
+                  res.body.length.should.not.be.eql(0);
+              done();
+            });
+      });
+
+    // Test the /GET route - Get all active(not archived) notes
+    it('it should Get all active notes', (done) => {
+        chai.request(app)
+            .get('/api/admin/active')
+            .end((err, res) => {
+                  res.should.have.status(200);
+                  res.body.should.be.a('array');
+                  res.body.length.should.not.be.eql(0);
+              done();
+            });
+      });
+
     // Test the /GET route - Get all users
-    it('it should GET all the active notes for a user', (done) => {
+    it('it should GET all users', (done) => {
         chai.request(app)
             .get('/api/admin/users')
             .end((err, res) => {
@@ -46,23 +71,21 @@ describe('/GET note', () => {
 
 
 //Test the /POST route
-describe('/POST note', () => {
+describe('/POST route', () => {
   
-  //Test the /POST route - it should save a note with all required attributes
-  it('it should save a note with all required attributes ', (done) => {
-    let note = {
-        title: "Test Note",
-        author: "apgeorge",
-        tags: ["test","trial"],
-        description: "Test Note for Trial"
+  //Test the /POST route - it should save a user with all required attributes
+  it('it should save a user with all required attributes ', (done) => {
+    let user = {
+        name: "Trial User2",
+        userid: "trialuser2"
     }
   chai.request(app)
-      .post('/api/notes/')
-      .send(note)
+      .post('/api/admin/users')
+      .send(user)
       .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property('msg').eql('Note added successfully');
+            res.body.should.have.property('msg').eql('User added successfully');
             
         done();
       });
@@ -71,7 +94,7 @@ describe('/POST note', () => {
 });
 
 //Test the /DELETE route
-describe('/DELETE note', () => {
+describe('/DELETE route', () => {
   
   //Test the /DELETE route - it should delete a user by id
   it('it should delete a user by id', (done) => {
