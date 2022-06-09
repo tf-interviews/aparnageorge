@@ -19,14 +19,14 @@ router.get('/test', (req, res) => res.send('admin route testing!'));
 router.route('/')
   .get(admin.notes)
 
-/* @route GET api/admin
+/* @route GET api/admin/archived
 @description Get all archived notes
 @access Public */ 
 router.route('/archived')
   .get(admin.archivednotes)
 
 
-/* @route GET api/admin
+/* @route GET api/admin/active
 @description Get all notes that aren't archived
 @access Public */
 router.route('/active')
