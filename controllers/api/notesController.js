@@ -35,7 +35,7 @@ exports.notebyid = function(req, res) {
 exports.savenote = function(req, res) {
     var noteTemp = new Note(req.body)
     noteTemp.save()
-    .then(note => res.json({ msg: 'Note added successfully' }))
+    .then(note => res.json(note))
     .catch(err => res.status(400).json({ error: 'Unable to add this note' }));
   };
 

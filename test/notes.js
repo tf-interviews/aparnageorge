@@ -116,7 +116,8 @@ describe('/POST note', () => {
       .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property('msg').eql('Note added successfully');
+            res.body.should.have.property('title').eql(note.title);
+            testnote = res.body;
             
         done();
       });
@@ -207,10 +208,10 @@ describe('/PUT note', () => {
 
 //Test the /DELETE route
 describe('/DELETE note', () => {
-  
+ 
   //Test the /DELETE route - it should delete a note by its id
   it('it should delete a note by its id', (done) => {
-    var testid  = "62a1a69e5daafd9c1f01c5e3";
+    var testid  = testnote._id;
     chai.request(app)
       .delete('/api/notes/'+testid)
       .end((err, res) => {
@@ -224,8 +225,9 @@ describe('/DELETE note', () => {
   //Test the /DELETE route - it should delete notes by their tag
   it('it should delete notes by their tag ', (done) => {
     var testtag = "tagtest";
+    var testauthor = "apgeorge";
     chai.request(app)
-      .delete('/api/notes/tags/:author/:tag')
+      .delete('/api/notes/tags/'+testauthor+'/'+testtag)
       .end((err, res) => {
             res.should.have.status(200);
             // res.body.should.be.a('object');
