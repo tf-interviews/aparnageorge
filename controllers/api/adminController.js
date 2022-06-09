@@ -54,7 +54,7 @@ exports.adduser = function(req, res) {
 @description Delete user by userid
 */ 
 exports.deleteuser = function(req, res) {
-    User.findOneAndDelete(req.params.userid, req.body)
+    User.findOneAndDelete({userid: req.params.userid})
       .then(user => res.json({ msg: 'User deleted successfully' }))
       .catch(err => res.status(404).json({ error: 'No such user found ' +err}));
     };
